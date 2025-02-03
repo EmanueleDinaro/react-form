@@ -1,14 +1,16 @@
 import { useState } from "react";
 
 function App() {
-  const [productList, setproductList] = useState([
+  const [productList, setProductList] = useState([
     "Pane",
     "mozzarella",
     "pomodoro",
   ]);
   const [newProduct, setNewProduct] = useState("")
- 
-console.log(newProduct);
+  const handleSubmit = event => {
+    event.preventDefault()
+     setProductList([...productList, newProduct])
+    }
 
   return (
     <>
@@ -20,9 +22,16 @@ console.log(newProduct);
         })}
       </ul>
       <hr />
-      <form>
-        <input type="text" onChange={event => {setNewProduct(event.target.value)}} placeholder="Inserisci un nuovo prodotto" />
-        <input type="submit" />
+      <form onSubmit={handleSubmit}>
+      <input
+          type="text"
+          value={newProduct}
+          onChange={(event) => {
+            setNewProduct(event.target.value);
+          }}
+          placeholder="Inserisci un nuovo prodotto"
+        />
+        <button type="submit">Aggiungi</button>
       </form>
     </>
   );
