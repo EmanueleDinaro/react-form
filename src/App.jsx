@@ -10,15 +10,20 @@ function App() {
   const handleSubmit = event => {
     event.preventDefault()
      setProductList([...productList, newProduct])
-    }
 
+    }
+    const deleteProduct = (productToDelete) => {
+      setProductList((currentProduct) =>
+        currentProduct.filter((product) => product !== productToDelete)
+      );
+    };
   return (
     <>
       <h1>Products List</h1>
       <ul>
         {productList.map((product, index) => {
           return <li key={index}>{product}
-          <button>cancella</button></li>;
+          <button onClick={() => deleteProduct(product)}>Cancella</button></li>;
         })}
       </ul>
       <hr />
